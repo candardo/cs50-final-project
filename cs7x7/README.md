@@ -1,38 +1,23 @@
 IDEA
 
-Clone del'app Android 7x7 (che non esiste più).
+Clone of an Android puzzle game called 7x7
 Gameplay: https://www.youtube.com/watch?v=Eh5baiga2Ig
 
-MOKUP AREA DI GIOCO
+GAME AREA MOKUP 
 
-- header con livello e punteggio
-- row con le prossime 3 tiles casuali
-- griglia 7x7
+- header: level and score
+- row: preview next three tiles
+- 7x7 grid
 
 GAMEPLAY
 
-- parte con 3 tiles casuali in posizione casuale
-- mostra le prossime 3 tiles che saranno posizionate
-- si muove una sola tile 
-    - lo scopo è avvicinare quelle dello stesso colore
-    - si muove in una casella libera a piacere
-    - ma solo se esiste un percorso non occupato da altre tile
-- allineando almeno 4 tile queste spariscono
-- vengono posizionale le prossime 3 tiles
-- si continua finchè il giocatore non può più muovere
+Goal: clear tile rows to get points. Four or more rows (horizontal, vertical or diagonal) of tiles with the same color are cleared.
 
-DIFFICOLTÀ
+On each turn new tiles are places until the grid is full and the game ends. The player can move one tile on each turn trying to line four tiles. Movement happens via keyboard input (arrows and space bar to pick and place the tile to be moved). A tile can be moved only if a clear path exist (empty grid cells).
 
-- stabilire se si possono eliminare delle tiles
-- stabilire se esiste un percorso possibile
-- eventualmente marcare le caselle su cui non si può muovere
-- drag and drop o frecce per muovere
+When the game starts the grid is empty and three tiles with a random color are placed in a random position. After the player moves a tile three new tiles are placed.
 
-IMPLEMENTAZIONE
+TODO
 
-- table con 7x7 tile contrassegnati da un colore e coordinate
-- generare una table con tutte le tile libere
-- generare tre tile random pescandole da quelle libere
-- controllare allineamenti verticali, orizzontali e diagonali e eliminare tile
-- gestire movimento con frecce e conferma
-- disegnare le tile
+- check movement path
+- check for lined tile on four possible directions: horizontal, vertical, diagonal (both slopes)
