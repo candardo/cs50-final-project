@@ -29,7 +29,13 @@ function love.load()
     cursorX = 1
     cursorY = 1
     cursorColor = {0, 0, 0}
+    cursorMode = 'line'
+
+    -- Pick and place tile information
     tilePicked = false
+    pickedTileX = 0
+    pickedTileY = 0
+    pickedTileColor = {}
 
 end
 
@@ -95,14 +101,21 @@ function love.keypressed(key)
     elseif key == 'down' and cursorY < 7 then
         cursorY = cursorY + 1
     end
-    print('x ' .. cursorX .. ' y ' .. cursorY)
+
     -- Tile pick and place
     if (key == 'space') then
-        print(tilePicked)
-        print(tiles[cursorY][cursorX]) 
-        -- if (tilePicked == false) and (tiles[cursorY][cursorX] ~= '_') then
-        -- tilePicked = true
-        -- cursorColor = {1, 0, 0}
+        if (tilePicked == false) and (tiles[cursorY][cursorX] ~= '_') then
+            tilePicked = true
+            pickedTileX = cursorX
+            pickedTileY = cursorY
+            pickedTileColor = tiles[cursorY][cursorX]
+            tiles[cursorY][cursorX] = '_'
+            cursorColor = {1, 0, 0}
+        elseif (tilePicked == true) and (tiles[cursorY][cursorX] == '_') then
+            tilePicked = false
+            tiles[cursorY][cursorX] = pickedTileColor
+            cursorColor = {0, 0, 0}
+        end
     end
 end
 
@@ -115,7 +128,7 @@ function love.draw()
     for i = 0, 6 do
         for j = 0, 6 do
             -- Get tile color and draw a tile
-            love.graphics.setColor(colors[tiles[i + 1][j + 1]])
+            love.graphics.setColor(colors[tiles[j + 1][i + 1]])
             love.graphics.rectangle('fill', 2 + (i * 50), 2 + (j * 50), 48, 48)
        end
     end
@@ -123,4 +136,9 @@ function love.draw()
     -- Draw player's cursor (black outline)
     love.graphics.setColor(cursorColor)
     love.graphics.rectangle('line', 1 + ((cursorX -1) * 50), 1 + ((cursorY - 1) * 50), 50, 50)
+    if tilePicked then
+        love.graphics.setColor(colors[pickedTileColor])
+        love.graphics.rectangle('fill', 2 + ((cursorX -1) * 50), 2 + ((cursorY - 1) * 50), 48, 48)
+    end
+
 end
