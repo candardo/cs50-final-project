@@ -19,5 +19,10 @@ When the game starts the grid is empty and three tiles with a random color are p
 
 TODO
 
-- check movement path
 - check for lined tile on four possible directions: horizontal, vertical, diagonal (both slopes)
+- new tiles overwrite! fix freetiles
+
+REFACTOR
+
+- cursor color in love.draw
+- manage keyboard input depending on tilePicked
